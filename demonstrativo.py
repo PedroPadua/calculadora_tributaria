@@ -22,12 +22,18 @@ class DemoTrib:
 
     def calcular_aliq_efetiva(self,rbt12, anexo):
         if rbt12 == 0:
-            return 0
+            return 0, self.df_anexos.iloc[0:0]
         if rbt12 > 4800000:
             #ver com a larissa
             pass
         df_efetivo = self.df_anexos[self.df_anexos['anexo'] == anexo]
         df_efetivo = df_efetivo[(rbt12 >= df_efetivo['r12_min']) & (rbt12<= df_efetivo['r12_max'])]
 
-        return (rbt12 * df_efetivo['aliq_nom'].item() - df_efetivo['vlr_ded'].item())/ rbt12
-    
+        return (rbt12 * df_efetivo['aliq_nom'].item() - df_efetivo['vlr_ded'].item())/ rbt12 , df_efetivo
+
+    def das_mensal(self, rbt12, fat_mes, anexo):
+
+        aliq_efe, df_filtrado = self.calcular_aliq_efetiva(rbt12, anexo)
+        das_total = aliq_efe * fat_mes
+        df_partilha = das_total * df_filtrado[['irpj', 'csll', 'cofins', 'pis/pasep', 'cpp', 'ipi', 'icms', 'iss']]
+        return das_total, df_partilha
