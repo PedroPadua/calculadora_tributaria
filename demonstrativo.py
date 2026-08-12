@@ -3,7 +3,7 @@ import pandas as pd
 
 class DemoTrib:
     def __init__(self):
-        pass
+        self.df_anexos = self._get_anexos_data()
 
     def _get_anexos_data(self):
         df_anexos = pd.read_excel('anexos.xls')
@@ -15,5 +15,7 @@ class DemoTrib:
             'Alíq. Nominal': 'aliq_nom',
             'Valor a Deduzir\n(R$)': 'vlr_ded'
         })
-        
-        df_anexos.columns = df_anexos.columns.str.lower()
+
+        df_anexos.columns = df_anexos.columns.str.replace('\n', ' ').str.strip().str.lower()
+
+        return df_anexos
