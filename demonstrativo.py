@@ -19,3 +19,15 @@ class DemoTrib:
         df_anexos.columns = df_anexos.columns.str.replace('\n', ' ').str.strip().str.lower()
 
         return df_anexos
+
+    def calcular_aliq_efetiva(self,rbt12, anexo):
+        if rbt12 == 0:
+            return 0
+        if rbt12 > 4800000:
+            #ver com a larissa
+            pass
+        df_efetivo = self.df_anexos[self.df_anexos['anexo'] == anexo]
+        df_efetivo = df_efetivo[(rbt12 >= df_efetivo['r12_min']) & (rbt12<= df_efetivo['r12_max'])]
+
+        return (rbt12 * df_efetivo['aliq_nom'].item() - df_efetivo['vlr_ded'].item())/ rbt12
+    
