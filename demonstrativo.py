@@ -37,3 +37,13 @@ class DemoTrib:
         das_total = aliq_efe * fat_mes
         df_partilha = das_total * df_filtrado[['irpj', 'csll', 'cofins', 'pis/pasep', 'cpp', 'ipi', 'icms', 'iss']]
         return das_total, df_partilha
+
+
+    def calcular_cbs_debito(self, vendas, aliq_cbs):
+        pass
+
+    def calcular_cbs_credito(self, compras, aliq_cbs):
+        pass
+
+    def cenario_hibrido(self, rbt12, fat_mes, anexo, compras, aliq_cbs):
+        pass
