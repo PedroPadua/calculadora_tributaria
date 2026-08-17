@@ -47,9 +47,11 @@ class DemoTrib:
         return compras_mes * self.aliq_cbs
 
     def cenario_hibrido(self, rbt12, fat_mes, anexo, compras):
-
-        das_total , df = self.das_mensal(rbt12, fat_mes, anexo)
-
+        das_total, df = self.das_mensal(rbt12, fat_mes, anexo)
+        
+        if das_total == 0:
+            return 0, 0, 0
+        
         pis = df['pis/pasep'].item()
         cofins = df['cofins'].item()
 
